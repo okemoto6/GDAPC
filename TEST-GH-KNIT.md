@@ -1,38 +1,133 @@
 Untitled
 ================
 
-## GitHub Documents
+# INTRODUCTION
 
-This is an R Markdown format used for publishing markdown documents to
-GitHub. When you click the **Knit** button all R code chunks are run and
-a markdown file (.md) suitable for publishing to GitHub is generated.
+The case study below is a part of Google Data Analytics Professional
+Certificate program. It covers all six phases of data analysis process:
+ask, prepare, process, analyze, share and act. The data used in this
+project were provided by course administrator – Google and contains data
+and information about fictional bike-share company – Cyclistic. In this
+scenario, I am a junior data analyst in Cyclistic marketing analytics
+team and were assigned to a new project which should provide insights
+that will drive a Cyclistics new marketing strategy.
 
-## Including Code
+PRZEROBIONE PRZEZ GPT:
 
-You can include R code in the document as follows:
+The following case study is a component of the Google Data Analytics
+Professional Certificate program. It encompasses all six phases of the
+data analysis process: *ask, prepare, process, analyze, share, and act.
+The data utilized for this project was furnished by the course
+administrator, Google, and consists of data and information pertaining
+to the fictional bike-share company, Cyclistic. In this context, I
+assume the role of a Junior Data Analyst within Cyclistic’s Marketing
+Analytics team, having been tasked with a new project aimed at
+delivering insights to inform Cyclistic’s forthcoming marketing
+strategy.*
 
-``` r
-summary(cars)
-```
+## 1. ASK PHASE
 
-    ##      speed           dist       
-    ##  Min.   : 4.0   Min.   :  2.00  
-    ##  1st Qu.:12.0   1st Qu.: 26.00  
-    ##  Median :15.0   Median : 36.00  
-    ##  Mean   :15.4   Mean   : 42.98  
-    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
-    ##  Max.   :25.0   Max.   :120.00
+The Cyclistic's forthcoming marketing strategy will be guided by the
+questions below:
 
-## Including Plots
+1.  How do annual members and casual riders use Cyclistic bikes
+    differently?
 
-You can also embed plots, for example:
+2.  Why would casual riders buy Cyclistic annual memberships?
 
-![](TEST-GH-KNIT_files/figure-gfm/pressure-1.png)<!-- -->
+3.  How can Cyclistic use digital media to influence casual riders to
+    become members?
 
-Note that the `echo = FALSE` parameter was added to the code chunk to
-prevent printing of the R code that generated the plot.
+The director of marketing, Lily Moreno, has assigned me a first question
+to answear.
 
-## DATA IMPORT AND BIND
+Assigned part of the analytics project will be guided by this business
+task:
+
+<u>Pointing habit patterns and behavior differences in casual and annual
+Cyclistic user groups.</u>
+
+## 2. PREPARE PHASE
+
+Used data comes internal from Cyclistic system. It is organized in csv
+files – each file contains quantitative set of data for each month and
+it covers whole year 2022. Data does not contain any personal
+information about the users and can not be connected with any specific
+one. One row contain data about one ride taken by user.
+
+Since it is every ride data and it is collected automatically, it is
+free of observer, sampling and confirmation bias. It also fulfills the
+conditions of good data (it is reliable, original, comprehensive,
+current and cited). Data's licensing, privacy, security and
+accessibility are specified in Data License Agreement available under
+<https://divvybikes.com/data-license-agreement> site.
+
+Problems with provided data that could create problems during the
+analysis:
+
+- *The amount of rides make it impossible to analyze a full year view in
+  one spreadsheet.*
+
+- *The start and end station names are not always provided.*
+
+- *The start and end station names are not consistent. Further analysis
+  showed that there is difference between number of station id's and
+  station names (same stations – by id - are sometimes named
+  differently).*
+
+- *The latitude and longitude of stations does not always have same
+  accuracy (differences in decimal places) but is 100% complete.
+  However, according to provided information, coordinates are not used
+  in this analysis project .*
+
+- *Because data is anonymized, it is impossible to link ride with user
+  and analyze his ride history.*
+
+## 3. PROCESS PHASE
+
+For initial cleaning and manipulating purposes Excel spreadsheet and
+Excel's Power Query tool were used. Since the amount of data is too big
+to be analyzed in one spreadsheet (5 667 711 rows), each file have been
+checked, cleaned and transformed separately.
+
+Cleaning details:
+
+TABELA Z WORDA
+
+Rows deleted during cleaning:
+
+![](ROWS%20CLEANED.png)
+
+Cleaning process reduced number of rows by 0,62%; total number of
+deleted rows = 35268.
+
+Data manipulation increased number of columns from 13 to 19. New data
+columns:
+
+- started_at_hour - hour when ride started,
+
+- started_at_hour_as_num - hour when hour started presented as number
+  data type,
+
+- start_id_len - length of hashed ride_id,
+
+- ride_len - length of ride,
+
+- start_day_of_week - day of week when ride started,
+
+- started_at_part_of_day - part of day when ride started.
+
+After cleaning and manipulating, each file was saved as csv file (for
+analysis in R Studio, Big Query SQL and Tableau visualizations) and xlsx
+file. In each months xlxs file new pivot table sheet with cleaned and
+manipulated data were created.
+
+## 4. ANALYZE PHASE
+
+Like mentioned above, the number of rows is too big to store and analyze
+data in one spreadsheet, so data have been imported into R Studio.
+
+### DATA IMPORT AND BIND
 
 ``` r
 jan_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/012022_tripdata.csv", sep = ';')
@@ -146,46 +241,6 @@ Data summary
 | started_at_hour_as_num |         0 |             1 |   0.61 | 0.21 |   0.00 |   0.48 |   0.65 |   0.76 |   1.00 |
 | ride_id_len            |         0 |             1 |  16.00 | 0.00 |  16.00 |  16.00 |  16.00 |  16.00 |  16.00 |
 | start_day_of_week      |         0 |             1 |   4.06 | 1.98 |   1.00 |   2.00 |   4.00 |   6.00 |   7.00 |
-
-``` r
-head(all_2022_data)
-```
-
-    ##            ride_id rideable_type       started_at         ended_at
-    ## 1 94696E127B0B5C2E  classic_bike 01.01.2022 09:22 02.01.2022 10:22
-    ## 2 2F30091C42C1A659  classic_bike 10.01.2022 07:15 11.01.2022 08:15
-    ## 3 FFF47E9771BE076B  classic_bike 24.01.2022 12:25 25.01.2022 11:25
-    ## 4 FF90D6D1A1A81046   docked_bike 10.01.2022 11:34 11.01.2022 10:34
-    ## 5 89F04C89178D2898  classic_bike 30.01.2022 10:30 31.01.2022 09:28
-    ## 6 ED144BF52E321C25  classic_bike 30.01.2022 11:02 31.01.2022 09:28
-    ##             start_station_name start_station_id        end_station_name
-    ## 1              Millennium Park            13008                        
-    ## 2 Sheffield Ave & Waveland Ave     TA1307000126                        
-    ## 3     University Ave & 57th St     KA1503000071 Lake Park Ave & 56th St
-    ## 4    Clinton St & Roosevelt Rd           WL-008  Michigan Ave & 14th St
-    ## 5  Southport Ave & Belmont Ave            13229                        
-    ## 6  Southport Ave & Belmont Ave            13229                        
-    ##   end_station_id start_lat start_lng  end_lat   end_lng customer_type
-    ## 1                 41.88103 -87.62408 41.87000 -87.63000        member
-    ## 2                 41.94940 -87.65453 41.94000 -87.66000        member
-    ## 3   TA1309000063  41.79148 -87.59986 41.79324 -87.58778        member
-    ## 4   TA1307000124  41.86712 -87.64109 41.86406 -87.62373        casual
-    ## 5                 41.93948 -87.66375 41.94000 -87.65000        member
-    ## 6                 41.93948 -87.66375 41.94000 -87.65000        member
-    ##   started_at_hour started_at_hour_as_num ride_id_len ride_len start_day_of_week
-    ## 1        09:22:49              0.3908449          16 24:59:55                 6
-    ## 2        07:15:21              0.3023264          16 24:59:52                 1
-    ## 3        12:25:04              0.5174074          16 23:00:00                 1
-    ## 4        11:34:32              0.4823148          16 22:59:37                 1
-    ## 5        10:30:32              0.4378704          16 22:57:29                 7
-    ## 6        11:02:03              0.4597569          16 22:25:58                 7
-    ##   started_at_part_of_day
-    ## 1                Morning
-    ## 2                Morning
-    ## 3              Afternoon
-    ## 4                Morning
-    ## 5                Morning
-    ## 6                Morning
 
 ## DATA TYPES CHANGE
 
