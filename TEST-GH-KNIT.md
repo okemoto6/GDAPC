@@ -1,4 +1,4 @@
-Untitled
+GOOGLE DATA ANALYTICS PROFESSIONAL CERTIFICATE CAPSTONE PROJECT
 ================
 
 # INTRODUCTION
@@ -27,7 +27,7 @@ strategy.*
 
 ## 1. ASK PHASE
 
-The Cyclistic's forthcoming marketing strategy will be guided by the
+The Cyclistic’s forthcoming marketing strategy will be guided by the
 questions below:
 
 1.  How do annual members and casual riders use Cyclistic bikes
@@ -58,7 +58,7 @@ one. One row contain data about one ride taken by user.
 Since it is every ride data and it is collected automatically, it is
 free of observer, sampling and confirmation bias. It also fulfills the
 conditions of good data (it is reliable, original, comprehensive,
-current and cited). Data's licensing, privacy, security and
+current and cited). Data’s licensing, privacy, security and
 accessibility are specified in Data License Agreement available under
 <https://divvybikes.com/data-license-agreement> site.
 
@@ -71,7 +71,7 @@ analysis:
 - *The start and end station names are not always provided.*
 
 - *The start and end station names are not consistent. Further analysis
-  showed that there is difference between number of station id's and
+  showed that there is difference between number of station id’s and
   station names (same stations – by id - are sometimes named
   differently).*
 
@@ -86,7 +86,7 @@ analysis:
 ## 3. PROCESS PHASE
 
 For initial cleaning and manipulating purposes Excel spreadsheet and
-Excel's Power Query tool were used. Since the amount of data is too big
+Excel’s Power Query tool were used. Since the amount of data is too big
 to be analyzed in one spreadsheet (5 667 711 rows), each file have been
 checked, cleaned and transformed separately.
 
@@ -297,9 +297,8 @@ all_2022_data_summary <- all_2022_data_test %>%
 View(all_2022_data_summary)
 ```
 
-## SUMMARY ABOVE SHOWS THAT ALL SUBGROUPS RIDES mode_of_part_of_day =
+## SUMMARY ABOVE SHOWS THAT ALL SUBGROUPS RIDES mode_of_part_of_day =‘Afternoon’ \#SO I DECIDED TO ADD A NEW COLUMN WITH FULL HOUR WHEN RIDE
 
-‘Afternoon’ \#SO I DECIDED TO ADD A NEW COLUMN WITH FULL HOUR WHEN RIDE
 STARTED:
 
 ``` r
