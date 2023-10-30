@@ -134,7 +134,7 @@ data in one spreadsheet, so data have been imported into R Studio.
 
 ### DATA IMPORT AND BIND
 
-```{r import, message=FALSE, warning=FALSE}
+```{r import, message=FALSE, warning=FALSE, include=FALSE}
 jan_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/012022_tripdata.csv", sep = ';')
 feb_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/022022_tripdata.csv", sep = ';')
 mar_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/032022_tripdata.csv", sep = ';')
@@ -149,7 +149,7 @@ nov_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/cs
 dec_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/122022_tripdata.csv", sep = ';')
 ```
 
-```{r bind}
+```{r bind, include=FALSE}
 all_2022_data <- rbind(jan_2022_data, feb_2022_data, mar_2022_data, apr_2022_data,
                        may_2022_data, jun_2022_data, jul_2022_data, aug_2022_data,
                        sep_2022_data, oct_2022_data, nov_2022_data, dec_2022_data)
@@ -157,7 +157,7 @@ all_2022_data <- rbind(jan_2022_data, feb_2022_data, mar_2022_data, apr_2022_dat
 
 ## INITIAL DATA CHECK
 
-```{r data check}
+```{r data_check}
 library(dplyr)
 library(skimr)
 
@@ -165,13 +165,18 @@ glimpse(all_2022_data)
 skim_without_charts(all_2022_data)
 ```
 
+All data was imported and binded properly and it is organized in 5 632 443 rows and 19 columns, all rows complete_rate is equal to 1 (which indicates that it is 100% complete). Except end_station_id row (complere_rate = 0,841), the reason of that was mentioned before. 
+
+Data check showed that started_at, ended_at and ride_len columns were imported as characters instead of datetime and duration data types. So it needs to be changed:
+
+
 ## DATA TYPES CHANGE
 
-```{r}
+```{r data_type_changes}
 library(tidyverse)
 library(lubridate)
 
-all_2022_data_test <- all_2022_data %>% 
+all_2022_data <- all_2022_data %>% 
   mutate(
     started_at = as_datetime(started_at, format = '%d.%m.%Y %H:%M'),
     ended_at = as_datetime(ended_at, format = '%d.%m.%Y %H:%M'),
@@ -179,10 +184,12 @@ all_2022_data_test <- all_2022_data %>%
   )
 ```
 
+As all data were merged into one file, additional month column will be needed for analysis:
+
 ## ADDITIONAL COLUMNS FOR CALCS AND VIZ
 
 ```{r}
-all_2022_data_test <- all_2022_data_test %>% 
+all_2022_data <- all_2022_data %>% 
   mutate(month = substr(started_at, 6, 7)
         )
 ```
@@ -190,7 +197,7 @@ all_2022_data_test <- all_2022_data_test %>%
 ## SUMMARY OF DATA BEFORE CALCS
 
 ```{r echo=TRUE, message=TRUE, warning=TRUE}
-all_2022_data_summary <- all_2022_data_test %>%
+all_2022_data_summary <- all_2022_data %>%
   group_by(customer_type, month, rideable_type) %>% 
   summarise(
     num_of_rides = n(),
@@ -207,41 +214,109 @@ View(all_2022_data_summary)
 STARTED:
 
 ```{r}
-all_2022_data_test <- all_2022_data_test %>% 
+all_2022_data <- all_2022_data %>% 
   mutate(started_at_full_hour = substr(started_at_hour, 1, 2))
 
 ```
 
 ## FINAL DF SUMMARY OF DATA BEFORE CALCS
 
-```{r}
-all_2022_data_summary <- all_2022_data_test %>%
-  group_by(customer_type, month, rideable_type, started_at_full_hour) %>% 
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+all_2022_data_summary <- all_2022_data %>%
+  group_by(customer_type, month, rideable_type, start_day_of_week, started_at_part_of_day, started_at_full_hour) %>% 
   summarise(
     num_of_rides = n(),
-    mean_ride_len = mean(ride_len),
-    mode_of_day_of_week = median(start_day_of_week)
-    )
+    mean_ride_len = mean(ride_len)
+           )
 ```
 
-## BASIC CALCULATIONS #TOTAL RIDES BY CUSTOMER TYPE
+## BASIC CALCULATIONS AND PLOTS
+#TOTAL RIDES BY CUSTOMER TYPE
 
-```{r echo=TRUE}
-all_2022_data_test_rides <- all_2022_data_test %>%
-  group_by(customer_type, month) %>% 
+```{r}
+all_2022_data_rides <- all_2022_data %>%
+  group_by(customer_type) %>% 
   summarise(num_of_rides = n())
 
-View(all_2022_data_test_rides)
+View(all_2022_data_rides)
 ```
 
-#PLOT FOR RIDES BY CUSTOMER TYPE library(ggplot2)
-ggplot(all_2022_data_summary, aes(x = customer_type, y =
-num_of_rides)) + geom_col() #PLOT FOR RIDES BY CUSTOMER TYPE BY MONTH
-ggplot(all_2022_data_summary, aes(x = customer_type, y =
-num_of_rides)) + geom_col() + facet_wrap(\~month)
+```{r}
+ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides)) + geom_col()
+
+```
+
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+all_2022_data_rides <- all_2022_data %>%
+  group_by(customer_type, month) %>% 
+  summarise(num_of_rides = n()) %>% 
+  arrange(-num_of_rides)
+```
+
+```{r include=FALSE}
+ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides)) + geom_col() + facet_wrap(~month)
+
+```
+
+```{r}
+ggplot(all_2022_data_summary, aes(x = month, y = num_of_rides)) + geom_col() + facet_wrap(~customer_type)
+
+```
+
+
+
+## SUMMARY ABOVE SHOWS THAT IN A YEAR VIEW, MOST POPULAR MONTH AMONG CASUAL USERS ARE: ....(...RIDES),... AND .... WHILE IN GROUP OF USERS WHO HAS ANNUAL SUBSCRIPTION MOST POPULAR ARE:
+
+#ANOTHER THING IS THAT IN EACH MONTH MEMBER USERS PERFORMED MORE RIDES THAN CASUAL USERS
+
+
+## NUM OF RIDES STARTED AT EACH PART OF DAY BY USERS
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = num_of_rides)) + geom_col() + facet_wrap(~customer_type)
+```
+
+## NUM OF RIDES STARTED AT EACH DAY OF WEEK BY USERS
+
+```{r echo=, message=FALSE, warning=FALSE}
+ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = num_of_rides)) + geom_col() + facet_wrap(~customer_type) + scale_x_discrete(limits = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+
+```
+## NUM OF RIDES STARTED AT EACH DAY OF WEEK BY USERS
+
+```{r echo=}
+ggplot(all_2022_data_summary, aes(x = started_at_full_hour, y = num_of_rides)) + geom_col() + facet_wrap(~customer_type)
+
+```
+
+
 
 #MEAN RIDE TIME BY CUSTOMER TYPE
 
-all_2022_data_test_time \<- all_2022_data_test %\>%
-group_by(customer_type, month) %\>% summarise(mean_ride_len =
-mean(ride_len))
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len)) + geom_bar(stat = "summary", fun = "mean")
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len)) + geom_bar(stat = "summary", fun = "mean") + facet_wrap(~month)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = mean_ride_len)) + geom_bar(stat = "summary", fun = "mean") + facet_wrap(~customer_type)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len)) + geom_bar(stat = "summary", fun = "mean") + facet_wrap(~started_at_part_of_day)
+```
+
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = mean_ride_len)) + geom_bar(stat = "summary", fun = "mean") + facet_wrap(~customer_type)
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len)) + geom_bar(stat = "summary", fun = "mean") + facet_wrap(~started_at_part_of_day)
+```
+
+
