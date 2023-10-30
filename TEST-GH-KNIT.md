@@ -244,6 +244,7 @@ View(all_2022_data_rides)
 ``` r
 ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides)) + geom_col()
 ```
+![](Rplot1.png)
 
 ``` r
 all_2022_data_rides <- all_2022_data %>%
