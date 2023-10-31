@@ -365,6 +365,7 @@ head(all_2022_data_rides)
 ```
 
 ``` r
+install.packages('ggplot2')
 library(ggplot2)
 
 plot <- ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = customer_type)) + geom_col(show.legend = FALSE) + labs(x = 'Customer type', y = 'Number of rides', title = 'Numer of rides performed in 2022', subtitle = 'by casual users and members', caption = 'Data source: Cyclistic bike-share system') + theme_light() + scale_y_continuous(labels = scales::comma) + scale_x_discrete()  + annotate('text', x = 1, y = 300000, label = '2 305 885', fontface = 'italic', size = 5.5) + annotate('text', x = 2, y = 300000, label = '3 326 558', fontface = 'italic', size = 5.5)
