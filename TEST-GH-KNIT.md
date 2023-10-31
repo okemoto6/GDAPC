@@ -379,7 +379,7 @@ print(plot)
 
     ## function (x, y, ...) 
     ## UseMethod("plot")
-    ## <bytecode: 0x000001a453598ca0>
+    ## <bytecode: 0x00000225e9753cc0>
     ## <environment: namespace:base>
 
 \#ADDING MONTH PARAMETER dodać kable() żeby wyszła tabela
