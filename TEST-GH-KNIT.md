@@ -419,7 +419,7 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = cu
   theme_light()
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/plot_1-1.png)<!-- -->
+![](TEST-GH-KNIT_files/figure-gfm/Rplot_1.png)<!-- -->
 
 - Number of rides by customer type by each month
 
