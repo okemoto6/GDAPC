@@ -211,7 +211,7 @@ Data summary
 All data was imported and binded properly and it is organized in 5 632
 443 rows and 19 columns, all rows complete_rate is equal to 1 (which
 indicates that it is 100% complete). Except end_station_id row
-(complere_rate = 0,841), the reason of that was mentioned before.
+(complete_rate = 0,841), the reason of that was mentioned before.
 
 Completion rate and consistency of min and max values of ride_id row
 shows positive evaluation throughout the whole dataset. Data frame above
@@ -221,7 +221,8 @@ assumption made while data cleaning.
 
 Data check showed that started_at, ended_at and ride_len columns were
 imported as characters instead of datetime and duration data types. So
-it needs to be changed:
+it needs to be changed. Because manipulating and making calculations on
+ride_len in numeric data type is easier, I decided to keep it this way.
 
 ## DATA TYPES CHANGE
 
@@ -260,6 +261,8 @@ glimpse(all_2022_data)
     ## $ ride_len               <dbl> 1500, 1500, 1380, 1380, 1378, 1346, 1321, 1270,…
     ## $ start_day_of_week      <int> 6, 1, 1, 1, 7, 7, 5, 1, 4, 4, 3, 1, 7, 7, 4, 2,…
     ## $ started_at_part_of_day <chr> "Morning", "Morning", "Afternoon", "Morning", "…
+
+\##PLIK DO TABLEAU
 
 As all data were merged into one file, additional month column will be
 needed for analysis:
@@ -306,11 +309,22 @@ all_2022_data_summary <- all_2022_data %>%
     num_of_rides = n(),
     mean_ride_len = mean(ride_len),
     mode_of_day_of_week = median(start_day_of_week),
-    mode_of_part_of_day_1 = names(sort(table(started_at_part_of_day), decreasing = TRUE)[1]),
+    mode_of_part_of_day = names(sort(table(started_at_part_of_day), decreasing = TRUE)[1]),
     )
 
 glimpse(all_2022_data_summary)
 ```
+
+    ## Rows: 60
+    ## Columns: 7
+    ## Groups: customer_type, month [24]
+    ## $ customer_type       <chr> "casual", "casual", "casual", "casual", "casual", …
+    ## $ month               <chr> "01", "01", "01", "02", "02", "02", "03", "03", "0…
+    ## $ rideable_type       <chr> "classic_bike", "docked_bike", "electric_bike", "c…
+    ## $ num_of_rides        <int> 6909, 925, 10460, 8042, 1330, 11823, 35190, 8176, …
+    ## $ mean_ride_len       <dbl> 21.59357, 36.97838, 12.86128, 23.73066, 44.74962, …
+    ## $ mode_of_day_of_week <dbl> 4, 5, 4, 4, 5, 4, 4, 4, 4, 6, 6, 5, 5, 5, 4, 5, 5,…
+    ## $ mode_of_part_of_day <chr> "Afternoon", "Afternoon", "Afternoon", "Afternoon"…
 
 ## SUMMARY ABOVE SHOWS THAT ALL SUBGROUPS RIDES mode_of_part_of_day =‘Afternoon’ \#SO I DECIDED TO ADD A NEW COLUMN WITH FULL HOUR WHEN RIDE
 
@@ -348,10 +362,6 @@ glimpse(all_2022_data_summary)
 
 ## ??????????????????? PRZENIEŚĆ WYŻEJ, EKSPORT MUSI BYĆ ZROBIONY DLA WSZYSTKICH DANYCH, TRZEBA SPRAWDZIĆ CZY PRZED CZY PO MUTATE AS THIS DATA WILL BE USED FOR SOME MORE VISUAL EXPLORATION AND PRESENTATION, IT HAS TO BE SAVED AS CSV FILE:
 
-``` r
-write.csv2(all_2022_data_summary, file = 'D:/GDAPC Case study/01_Bike_share/all_2022_data_R_summary_file.csv')
-```
-
 ## BASIC CALCULATIONS AND PLOTS
 
 \#TOTAL RIDES BY CUSTOMER TYPE
@@ -364,13 +374,22 @@ all_2022_data_rides <- all_2022_data %>%
 head(all_2022_data_rides)
 ```
 
+    ## # A tibble: 2 × 2
+    ##   customer_type num_of_rides
+    ##   <chr>                <int>
+    ## 1 casual             2305885
+    ## 2 member             3326558
+
 ``` r
-install.packages('ggplot2')
 library(ggplot2)
+library(RColorBrewer)
 
-plot <- ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = customer_type)) + geom_col(show.legend = FALSE) + labs(x = 'Customer type', y = 'Number of rides', title = 'Numer of rides performed in 2022', subtitle = 'by casual users and members', caption = 'Data source: Cyclistic bike-share system') + theme_light() + scale_y_continuous(labels = scales::comma) + scale_x_discrete()  + annotate('text', x = 1, y = 300000, label = '2 305 885', fontface = 'italic', size = 5.5) + annotate('text', x = 2, y = 300000, label = '3 326 558', fontface = 'italic', size = 5.5)
-
-print(plot)
+ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = customer_type)) + 
+  geom_col(show.legend = FALSE) + 
+  labs(x = 'Customer type', y = 'Number of rides', title = 'Numer of rides performed', subtitle = 'by customer type', caption = 'Source: Cyclistic bike-share system 2022 data') + 
+  scale_y_continuous(labels = scales::comma) +
+  scale_fill_brewer(palette = 'Set1') +
+  theme_light()
 ```
 
 ![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
@@ -378,21 +397,80 @@ print(plot)
 \#ADDING MONTH PARAMETER dodać kable() żeby wyszła tabela
 
 ``` r
+library(knitr)
 all_2022_data_rides <- all_2022_data %>%
   group_by(customer_type, month) %>% 
   summarise(num_of_rides = n()) %>% 
   arrange(-num_of_rides)
+
+kable(all_2022_data_rides)
 ```
 
+| customer_type | month | num_of_rides |
+|:--------------|:------|-------------:|
+| member        | 08    |       424710 |
+| member        | 07    |       415244 |
+| casual        | 07    |       403433 |
+| member        | 09    |       402600 |
+| member        | 06    |       398001 |
+| casual        | 06    |       366519 |
+| casual        | 08    |       356481 |
+| member        | 05    |       352428 |
+| member        | 10    |       347690 |
+| casual        | 09    |       294858 |
+| casual        | 05    |       278387 |
+| member        | 04    |       243084 |
+| member        | 11    |       235645 |
+| casual        | 10    |       207678 |
+| member        | 03    |       193069 |
+| member        | 12    |       135916 |
+| casual        | 04    |       125325 |
+| casual        | 11    |       100025 |
+| member        | 02    |        93417 |
+| casual        | 03    |        89196 |
+| member        | 01    |        84754 |
+| casual        | 12    |        44494 |
+| casual        | 02    |        21195 |
+| casual        | 01    |        18294 |
+
 ``` r
-ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = customer_type)) + geom_col() + labs(x = NULL, y = 'Number of rides', title = 'Numer of rides performed in 2022', subtitle = 'by month by casual users and members', caption = 'Data source: Cyclistic bike-share system') + theme_light() + scale_y_continuous(labels = scales::comma) + facet_grid(~month) + theme(axis.text.x = element_blank()) + guides(fill = guide_legend(title = "Customer type"))
+ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = customer_type)) + 
+  geom_col() +
+  facet_grid(~month, labeller = labeller(month = c(
+    "01" = "January",
+    "02" = "February",
+    "03" = "March",
+    "04" = "April",
+    "05" = "May",
+    "06" = "June",
+    "07" = "July",
+    "08" = "August",
+    "09" = "September",
+    "10" = "October",
+    "11" = "November",
+    "12" = "December"))) +
+  scale_y_continuous(labels = scales::comma) + 
+  scale_fill_brewer(palette = 'Accent') +
+  theme_light() + 
+  theme(axis.text.x = element_blank()) + 
+  labs(x = NULL, y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by month', caption = 'Source: Cyclistic bike-share system 2022 data') + 
+  guides(fill = guide_legend(title = "Customer type"))
 ```
 
 ![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 \###DODAĆ WYKRES SKUMULOWANY
 
 ``` r
-ggplot(all_2022_data_summary, aes(x = month, y = num_of_rides, fill = customer_type)) + geom_col(show.legend = FALSE) + labs(x = 'Month', y = 'Number of rides', title = 'Numer of rides performed in 2022', subtitle = 'by month by casual users and members', caption = 'Data source: Cyclistic bike-share system') + theme_light() + scale_y_continuous(labels = scales::comma) + facet_grid(~customer_type) + guides(fill = guide_legend(title = "Customer type"))
+ggplot(all_2022_data_summary, aes(x = month, y = num_of_rides, fill = customer_type)) + 
+  geom_col(show.legend = FALSE) +
+  facet_grid(~customer_type) + 
+  scale_y_continuous(labels = scales::comma) +
+  scale_x_discrete(breaks = c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
+                   labels = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")) +
+  scale_fill_brewer(palette = 'Accent') +
+  theme_light() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = 'Month', y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by month', caption = 'Source: Cyclistic bike-share system 2022 data')
 ```
 
 ## SUMMARY ABOVE SHOWS THAT IN A YEAR VIEW, MOST POPULAR MONTH AMONG CASUAL USERS ARE: ….(…RIDES),… AND …. WHILE IN GROUP OF USERS WHO HAS ANNUAL SUBSCRIPTION MOST POPULAR ARE:
@@ -406,65 +484,250 @@ OVER 350 000 RIDES ONLY IN 3 MONTHS PER YEAR
 ## NUM OF RIDES STARTED AT EACH PART OF DAY BY USERS
 
 ``` r
-ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = mean_ride_len, fill = customer_type)) + geom_col(show.legend = FALSE) + labs(x = 'Month', y = 'Number of rides', title = 'Numer of rides performed in 2022', subtitle = 'by month by casual users and members', caption = 'Data source: Cyclistic bike-share system') + theme_light() + scale_y_continuous(labels = scales::comma) + scale_x_discrete(limits = c("Morning", "Afternoon", "Evening", "Night")) + facet_grid(~customer_type) + guides(fill = guide_legend(title = "Customer type")) + scale_fill_brewer()
+ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = customer_type)) + 
+  geom_col() +
+  facet_grid(~factor(started_at_part_of_day, levels = c("Morning", "Afternoon", "Evening", "Night"))) +
+  scale_fill_brewer(palette = 'Dark2') +
+  scale_y_continuous(labels = scales::comma) +
+  theme_light() + 
+  theme(axis.text.x = element_blank()) +
+  labs(x = NULL, y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by part of day when ride started', caption = 'Source: Cyclistic bike-share system 2022 data') +
+  guides(fill = guide_legend(title = "Customer type"))
 ```
 
 ![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
-## NUM OF RIDES STARTED AT EACH PART OF DAY BY USERS - DO POPRAWY KOLEJNOŚĆ
+## NUM OF RIDES STARTED AT EACH PART OF DAY BY USERS
 
 ``` r
-ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = customer_type)) + geom_col() + labs(x = 'Month', y = 'Number of rides', title = 'Numer of rides performed in 2022', subtitle = 'by month by casual users and members', caption = 'Data source: Cyclistic bike-share system') + theme_light() + scale_y_continuous(labels = scales::comma) + facet_grid(~started_at_part_of_day) + guides(fill = guide_legend(title = "Customer type")) + scale_fill_brewer()
+ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = num_of_rides, fill = customer_type)) + 
+  geom_col(show.legend = FALSE) +
+  facet_grid(~customer_type) +
+  scale_fill_brewer(palette = 'Dark2') +
+  scale_x_discrete(limits = c("Morning", "Afternoon", "Evening", "Night")) + 
+  scale_y_continuous(labels = scales::comma) + 
+  theme_light() +
+  labs(x = 'Part of day when ride started', y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by part of day', caption = 'Source: Cyclistic bike-share system 2022 data')
 ```
 
 ![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
+``` r
+all_2022_data_calc <- all_2022_data %>% 
+  group_by(customer_type, start_day_of_week) %>% 
+  summarise(num_of_rides = n())
+```
+
+    ## `summarise()` has grouped output by 'customer_type'. You can override using the
+    ## `.groups` argument.
+
+``` r
+kable(all_2022_data_calc)
+```
+
+| customer_type | start_day_of_week | num_of_rides |
+|:--------------|------------------:|-------------:|
+| casual        |                 1 |       275757 |
+| casual        |                 2 |       261949 |
+| casual        |                 3 |       272538 |
+| casual        |                 4 |       307301 |
+| casual        |                 5 |       332365 |
+| casual        |                 6 |       469872 |
+| casual        |                 7 |       386103 |
+| member        |                 1 |       470732 |
+| member        |                 2 |       515841 |
+| member        |                 3 |       520850 |
+| member        |                 4 |       529447 |
+| member        |                 5 |       464394 |
+| member        |                 6 |       440506 |
+| member        |                 7 |       384788 |
+
 ## NUM OF RIDES STARTED AT EACH DAY OF WEEK BY USERS
 
 ``` r
-ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = num_of_rides, fill = customer_type)) + geom_col() + facet_wrap(~customer_type) + scale_x_discrete(limits = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")) + scale_y_continuous(labels = scales::comma) + guides(x = guide_axis(angle = 45)) + scale_fill_brewer() + theme_light()
+ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = customer_type)) + 
+  geom_col() + 
+  facet_grid(~start_day_of_week, labeller = labeller(start_day_of_week = c(
+    "1" = "Monday",
+    "2" = "Tuesday",
+    "3" = "Wednesday",
+    "4" = "Thursday",
+    "5" = "Friday",
+    "6" = "Saturday",
+    "7" = "Sunday"))) +
+  scale_fill_brewer(palette = 'Dark2') + 
+  scale_y_continuous(labels = scales::comma) +
+  theme_light() +
+  theme(axis.text.x = element_blank()) + 
+  labs(x = NULL, y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by day of week', caption = 'Source: Cyclistic bike-share system 2022 data') +
+  guides(fill = guide_legend(title = "Customer type"))
 ```
-
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
-
-## NUM OF RIDES STARTED AT EACH DAY OF WEEK BY USERS
 
 ``` r
-ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = customer_type)) + geom_col() + facet_grid(~start_day_of_week)
+ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = num_of_rides, fill = customer_type)) + 
+  geom_col(show.legend = FALSE) + 
+  facet_wrap(~customer_type) +
+  scale_fill_brewer(palette = 'Dark2') + 
+  scale_x_discrete(limits = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")) + 
+  scale_y_continuous(labels = scales::comma) +
+  theme_light() +
+  labs(x = 'Day of week when ride started', y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by day of week', caption = 'Source: Cyclistic bike-share system 2022 data') +
+  guides(x = guide_axis(angle = 45))
 ```
+
+![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
 \#MEAN RIDE TIME BY CUSTOMER TYPE
 
 ``` r
-ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len)) + geom_bar(stat = "summary", fun = "mean")
+ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = customer_type)) + 
+  geom_bar(stat = "summary", fun = "mean", show.legend = FALSE) +
+  scale_fill_brewer(palette = 'Set1') +
+  theme_light() +
+  labs(x = 'Customer type', y = 'Mean ride length [min]', title = 'Mean ride length', subtitle = 'by customer type', caption = 'Source: Cyclistic bike-share system 2022 data')
 ```
 
 ``` r
-ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len)) + geom_bar(stat = "summary", fun = "mean") + facet_grid(~month)
+ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = customer_type)) + 
+  geom_bar(stat = "summary", fun = "mean") + 
+  facet_grid(~month, labeller = labeller(month = c(
+    "01" = "January",
+    "02" = "February",
+    "03" = "March",
+    "04" = "April",
+    "05" = "May",
+    "06" = "June",
+    "07" = "July",
+    "08" = "August",
+    "09" = "September",
+    "10" = "October",
+    "11" = "November",
+    "12" = "December"))) +
+  scale_fill_brewer(palette = 'Accent') +
+  theme_light() + 
+  theme(axis.text.x = element_blank()) +
+  labs(x = NULL, y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by month', caption = 'Source: Cyclistic bike-share system 2022 data') + 
+  guides(fill = guide_legend(title = "Customer type"))
 ```
-
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
-
-``` r
-ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = customer_type)) + geom_point(stat = "summary", fun = "mean") + scale_x_continuous(limits = c(0, 360), breaks = seq(0, 360, by = 60))
-```
-
-    ## Warning: Removed 2 rows containing non-finite values (`stat_summary()`).
 
 ![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
 ``` r
-ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = mean_ride_len)) + geom_bar(stat = "summary", fun = "mean") + facet_wrap(~customer_type)
+ggplot(all_2022_data_summary, aes(x = month, y = mean_ride_len, fill = customer_type)) + 
+  geom_bar(stat = 'summary', fun = 'mean', show.legend = FALSE) +
+  facet_grid(~customer_type) + 
+  scale_fill_brewer(palette = 'Accent') +
+  scale_x_discrete(breaks = c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
+                   labels = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")) +
+  scale_y_continuous(labels = scales::comma) + 
+  theme_light() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(x = 'Month', y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by month', caption = 'Source: Cyclistic bike-share system 2022 data') + 
+  guides(fill = guide_legend(title = "Customer type"))
+```
+
+![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+
+\#AS SHOWED ABOVE, MEAN RIDE TIME FOR CASUAL USER IS HIGHER THAN FOR
+MEMBER BUT DEPENDS ON MONTH WHILE MEAN FOR MEMBER IS CONSISTENT
+THROUGHOUT THE YEAR.
+
+``` r
+ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = customer_type)) + 
+  geom_bar(stat = "summary", fun = "mean") +
+  facet_grid(~factor(started_at_part_of_day, levels = c("Morning", "Afternoon", "Evening", "Night"))) +
+  scale_fill_brewer(palette = 'Dark2') +
+  theme_light() + 
+  theme(axis.text.x = element_blank()) + 
+  labs(x = NULL, y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by part of day when ride started', caption = 'Source: Cyclistic bike-share system 2022 data') + 
+  guides(fill = guide_legend(title = "Customer type"))
+```
+
+![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+
+``` r
+ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = mean_ride_len, fill = customer_type)) + 
+  geom_bar(stat = "summary", fun = "mean", show.legend = FALSE) + 
+  facet_wrap(~customer_type) +
+  scale_fill_brewer(palette = 'Dark2') +
+  scale_x_discrete(limits = c('Morning', 'Afternoon', 'Evening', 'Night')) +
+  theme_light() +
+  labs(x = 'Part of day when ride started', y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by part of day', caption = 'Source: Cyclistic bike-share system 2022 data')
+```
+
+![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+
+``` r
+ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = customer_type)) + 
+  geom_bar(stat = "summary", fun = "mean") +
+  facet_grid(~start_day_of_week, labeller = labeller(start_day_of_week = c(
+    '1' = 'Monday',
+    '2' = 'Tuesday',
+    '3' = 'Wednesday',
+    '4' = 'Thursday',
+    '5' = 'Friday',
+    '6' = 'Saturday',
+    '7' = 'Sunday'))) +
+  scale_fill_brewer(palette = 'Dark2') +
+  theme_light() + 
+  theme(axis.text.x = element_blank()) +
+  labs(x = NULL, y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by day of week', caption = 'Source: Cyclistic bike-share system 2022 data') + 
+  guides(fill = guide_legend(title = "Customer type"))
 ```
 
 ``` r
-ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len)) + geom_bar(stat = "summary", fun = "mean") + facet_wrap(~started_at_part_of_day)
+ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = mean_ride_len, fill = customer_type)) + 
+  geom_bar(stat = "summary", fun = "mean", show.legend = FALSE) + 
+  facet_grid(~customer_type) +
+  scale_fill_brewer(palette = 'Dark2') + 
+  scale_x_discrete(limits = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")) + 
+  theme_light() +
+  labs(x = 'Day of week', y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by day of week', caption = 'Source: Cyclistic bike-share system 2022 data') + 
+  guides(x = guide_axis(angle = 45))
 ```
 
-``` r
-ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = mean_ride_len)) + geom_bar(stat = "summary", fun = "mean") + facet_wrap(~customer_type)
-```
+![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
+
+\#MEAN RIDE TIME VS NUMBER OF RIDES PERFORMED BY CASUALS AND MEMBERS (2
+RIDES WERE EXCLUDED - DODAĆ TABELĘ TOP 10 RIDES)
 
 ``` r
-ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len)) + geom_bar(stat = "summary", fun = "mean") + facet_wrap(~started_at_part_of_day)
+ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = customer_type)) + 
+  geom_point(stat = "summary", fun = "mean") +
+  scale_x_continuous(limits = c(0, 360), breaks = seq(0, 360, by = 60)) +
+  theme_light() +
+  labs(x = 'Mean ride length [min]', y = 'Number of rides', title = 'Mean ride length by customer type', subtitle = 'by number of rides', caption = 'Source: Cyclistic bike-share system 2022 data') +
+  guides(title = "Customer type")
 ```
+
+    ## Warning: Removed 2 rows containing non-finite values (`stat_summary()`).
+
+![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-24-1.png)<!-- --> \#LETS
+EXPLORE THE PEAK BETWEEN RIDES THAT LASTS BETWEEN 35 AND 70 MINUTES
+PERFORMED BY CASUAL RIDERS
+
+``` r
+#1ST CASUAL PEAK IN DETAILS
+ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = customer_type)) + 
+  geom_point(stat = "summary", fun = "mean") +
+  scale_x_continuous(limits = c(20, 90), breaks = seq(0, 90, by = 5)) +
+  theme_light() +
+  labs(x = 'Mean ride length [min]', y = 'Number of rides', title = 'Mean ride length', subtitle = 'by number of rides', caption = 'Source: Cyclistic bike-share system 2022 data') +
+  guides(color = guide_legend(title = "Customer type"))
+```
+
+    ## Warning: Removed 7149 rows containing non-finite values (`stat_summary()`).
+
+![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
+
+``` r
+ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = customer_type)) + 
+  geom_point(stat = "summary", fun = "mean") + 
+  facet_wrap(~rideable_type) + 
+  scale_x_continuous(limits = c(20, 90), breaks = seq(0, 90, by = 20)) +
+  labs(x = 'Mean ride length [min]', y = 'Number of rides', title = 'Mean ride length by ridealble type', subtitle = 'by number of rides', caption = 'Source: Cyclistic bike-share system 2022 data')
+```
+
+    ## Warning: Removed 7149 rows containing non-finite values (`stat_summary()`).
+
+![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
