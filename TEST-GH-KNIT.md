@@ -129,6 +129,27 @@ data in one spreadsheet, so data have been imported into R Studio.
 
 ### DATA IMPORT AND BIND
 
+``` r
+jan_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/012022_tripdata.csv", sep = ';')
+feb_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/022022_tripdata.csv", sep = ';')
+mar_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/032022_tripdata.csv", sep = ';')
+apr_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/042022_tripdata.csv", sep = ';')
+may_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/052022_tripdata.csv", sep = ';')
+jun_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/062022_tripdata.csv", sep = ';')
+jul_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/072022_tripdata.csv", sep = ';')
+aug_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/082022_tripdata.csv", sep = ';')
+sep_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/092022_tripdata.csv", sep = ';')
+oct_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/102022_tripdata.csv", sep = ';')
+nov_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/112022_tripdata.csv", sep = ';')
+dec_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/122022_tripdata.csv", sep = ';')
+```
+
+``` r
+all_2022_data <- rbind(jan_2022_data, feb_2022_data, mar_2022_data, apr_2022_data,
+                       may_2022_data, jun_2022_data, jul_2022_data, aug_2022_data,
+                       sep_2022_data, oct_2022_data, nov_2022_data, dec_2022_data)
+```
+
 ## INITIAL DATA CHECK
 
 ``` r
@@ -264,6 +285,12 @@ glimpse(all_2022_data)
 
 \##PLIK DO TABLEAU
 
+``` r
+all_2022_data_R_for_Tableau <- select(all_2022_data, ride_id, rideable_type, started_at, ended_at, start_lat, start_lng, end_lat, end_lng, customer_type, ride_len, started_at_part_of_day)
+
+write.csv2(all_2022_data_R_for_Tableau, file = 'D:/GDAPC Case study/01_Bike_share/all_2022_data_R_for_Tableau.csv')
+```
+
 As all data were merged into one file, additional month column will be
 needed for analysis:
 
@@ -326,9 +353,9 @@ glimpse(all_2022_data_summary)
     ## $ mode_of_day_of_week <dbl> 4, 5, 4, 4, 5, 4, 4, 4, 4, 6, 6, 5, 5, 5, 4, 5, 5,…
     ## $ mode_of_part_of_day <chr> "Afternoon", "Afternoon", "Afternoon", "Afternoon"…
 
-## SUMMARY ABOVE SHOWS THAT ALL SUBGROUPS RIDES mode_of_part_of_day =‘Afternoon’ \#SO I DECIDED TO ADD A NEW COLUMN WITH FULL HOUR WHEN RIDE
-
-STARTED:
+Summary above showed that all subgroups rides mode_of_part_of_day =
+‘Afternoon’ so adding a new column with full hour when ride started
+could be usefull in further analysis:
 
 ``` r
 all_2022_data <- all_2022_data %>% 
@@ -360,25 +387,25 @@ glimpse(all_2022_data_summary)
     ## $ num_of_rides           <int> 55, 48, 74, 55, 92, 89, 71, 56, 25, 22, 26, 11,…
     ## $ mean_ride_len          <dbl> 27.400000, 49.333333, 47.837838, 23.145455, 19.…
 
-## ??????????????????? PRZENIEŚĆ WYŻEJ, EKSPORT MUSI BYĆ ZROBIONY DLA WSZYSTKICH DANYCH, TRZEBA SPRAWDZIĆ CZY PRZED CZY PO MUTATE AS THIS DATA WILL BE USED FOR SOME MORE VISUAL EXPLORATION AND PRESENTATION, IT HAS TO BE SAVED AS CSV FILE:
+The data summary above will be used for all future calculations and
+visualizations in R.
 
-## BASIC CALCULATIONS AND PLOTS
-
-\#TOTAL RIDES BY CUSTOMER TYPE
+- Number of rides by customer type:
 
 ``` r
+library(knitr)
+
 all_2022_data_rides <- all_2022_data %>%
   group_by(customer_type) %>% 
   summarise(num_of_rides = n())
 
-head(all_2022_data_rides)
+kable(all_2022_data_rides)
 ```
 
-    ## # A tibble: 2 × 2
-    ##   customer_type num_of_rides
-    ##   <chr>                <int>
-    ## 1 casual             2305885
-    ## 2 member             3326558
+| customer_type | num_of_rides |
+|:--------------|-------------:|
+| casual        |      2305885 |
+| member        |      3326558 |
 
 ``` r
 library(ggplot2)
@@ -392,12 +419,11 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = cu
   theme_light()
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](TEST-GH-KNIT_files/figure-gfm/plot_1-1.png)<!-- -->
 
-\#ADDING MONTH PARAMETER dodać kable() żeby wyszła tabela
+- Number of rides by customer type by each month
 
 ``` r
-library(knitr)
 all_2022_data_rides <- all_2022_data %>%
   group_by(customer_type, month) %>% 
   summarise(num_of_rides = n()) %>% 
@@ -457,8 +483,7 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = cu
   guides(fill = guide_legend(title = "Customer type"))
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
-\###DODAĆ WYKRES SKUMULOWANY
+![](TEST-GH-KNIT_files/figure-gfm/plot_2-1.png)<!-- -->
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = month, y = num_of_rides, fill = customer_type)) + 
@@ -495,7 +520,7 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = cu
   guides(fill = guide_legend(title = "Customer type"))
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](TEST-GH-KNIT_files/figure-gfm/plot_4-1.png)<!-- -->
 
 ## NUM OF RIDES STARTED AT EACH PART OF DAY BY USERS
 
@@ -510,18 +535,13 @@ ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = num_of_rides, 
   labs(x = 'Part of day when ride started', y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by part of day', caption = 'Source: Cyclistic bike-share system 2022 data')
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](TEST-GH-KNIT_files/figure-gfm/plot_5-1.png)<!-- -->
 
 ``` r
 all_2022_data_calc <- all_2022_data %>% 
   group_by(customer_type, start_day_of_week) %>% 
   summarise(num_of_rides = n())
-```
 
-    ## `summarise()` has grouped output by 'customer_type'. You can override using the
-    ## `.groups` argument.
-
-``` r
 kable(all_2022_data_calc)
 ```
 
@@ -575,8 +595,6 @@ ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = num_of_rides, fill 
   guides(x = guide_axis(angle = 45))
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
-
 \#MEAN RIDE TIME BY CUSTOMER TYPE
 
 ``` r
@@ -610,8 +628,6 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = c
   guides(fill = guide_legend(title = "Customer type"))
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
-
 ``` r
 ggplot(all_2022_data_summary, aes(x = month, y = mean_ride_len, fill = customer_type)) + 
   geom_bar(stat = 'summary', fun = 'mean', show.legend = FALSE) +
@@ -625,8 +641,6 @@ ggplot(all_2022_data_summary, aes(x = month, y = mean_ride_len, fill = customer_
   labs(x = 'Month', y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by month', caption = 'Source: Cyclistic bike-share system 2022 data') + 
   guides(fill = guide_legend(title = "Customer type"))
 ```
-
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
 
 \#AS SHOWED ABOVE, MEAN RIDE TIME FOR CASUAL USER IS HIGHER THAN FOR
 MEMBER BUT DEPENDS ON MONTH WHILE MEAN FOR MEMBER IS CONSISTENT
@@ -643,7 +657,7 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = c
   guides(fill = guide_legend(title = "Customer type"))
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+![](TEST-GH-KNIT_files/figure-gfm/plot_11-1.png)<!-- -->
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = mean_ride_len, fill = customer_type)) + 
@@ -655,7 +669,7 @@ ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = mean_ride_len,
   labs(x = 'Part of day when ride started', y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by part of day', caption = 'Source: Cyclistic bike-share system 2022 data')
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+![](TEST-GH-KNIT_files/figure-gfm/plot_12-1.png)<!-- -->
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = customer_type)) + 
@@ -686,8 +700,6 @@ ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = mean_ride_len, fill
   guides(x = guide_axis(angle = 45))
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
-
 \#MEAN RIDE TIME VS NUMBER OF RIDES PERFORMED BY CASUALS AND MEMBERS (2
 RIDES WERE EXCLUDED - DODAĆ TABELĘ TOP 10 RIDES)
 
@@ -700,11 +712,8 @@ ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = c
   guides(title = "Customer type")
 ```
 
-    ## Warning: Removed 2 rows containing non-finite values (`stat_summary()`).
-
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-24-1.png)<!-- --> \#LETS
-EXPLORE THE PEAK BETWEEN RIDES THAT LASTS BETWEEN 35 AND 70 MINUTES
-PERFORMED BY CASUAL RIDERS
+\#LETS EXPLORE THE PEAK BETWEEN RIDES THAT LASTS BETWEEN 35 AND 70
+MINUTES PERFORMED BY CASUAL RIDERS
 
 ``` r
 #1ST CASUAL PEAK IN DETAILS
@@ -716,10 +725,6 @@ ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = c
   guides(color = guide_legend(title = "Customer type"))
 ```
 
-    ## Warning: Removed 7149 rows containing non-finite values (`stat_summary()`).
-
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-25-1.png)<!-- -->
-
 ``` r
 ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = customer_type)) + 
   geom_point(stat = "summary", fun = "mean") + 
@@ -728,6 +733,4 @@ ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = c
   labs(x = 'Mean ride length [min]', y = 'Number of rides', title = 'Mean ride length by ridealble type', subtitle = 'by number of rides', caption = 'Source: Cyclistic bike-share system 2022 data')
 ```
 
-    ## Warning: Removed 7149 rows containing non-finite values (`stat_summary()`).
-
-![](TEST-GH-KNIT_files/figure-gfm/unnamed-chunk-26-1.png)<!-- -->
+## 5. SHARE PHASE
