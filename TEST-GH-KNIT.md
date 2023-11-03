@@ -482,7 +482,7 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = cu
   guides(fill = guide_legend(title = "Customer type"))
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/plot_2-1.png)<!-- -->
+![](Rplot_2.png)
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = month, y = num_of_rides, fill = customer_type)) + 
@@ -496,6 +496,8 @@ ggplot(all_2022_data_summary, aes(x = month, y = num_of_rides, fill = customer_t
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(x = 'Month', y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by month', caption = 'Source: Cyclistic bike-share system 2022 data')
 ```
+![](Rplot_3.png)
+
 
 ## SUMMARY ABOVE SHOWS THAT IN A YEAR VIEW, MOST POPULAR MONTH AMONG CASUAL USERS ARE: ….(…RIDES),… AND …. WHILE IN GROUP OF USERS WHO HAS ANNUAL SUBSCRIPTION MOST POPULAR ARE:
 
@@ -519,7 +521,7 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = cu
   guides(fill = guide_legend(title = "Customer type"))
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/plot_4-1.png)<!-- -->
+![](Rplot_4.png)
 
 ## NUM OF RIDES STARTED AT EACH PART OF DAY BY USERS
 
@@ -534,7 +536,7 @@ ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = num_of_rides, 
   labs(x = 'Part of day when ride started', y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by part of day', caption = 'Source: Cyclistic bike-share system 2022 data')
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/plot_5-1.png)<!-- -->
+![](Rplot_5.png)
 
 ``` r
 all_2022_data_calc <- all_2022_data %>% 
@@ -582,6 +584,9 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = cu
   guides(fill = guide_legend(title = "Customer type"))
 ```
 
+![](Rplot_6.png)
+
+
 ``` r
 ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = num_of_rides, fill = customer_type)) + 
   geom_col(show.legend = FALSE) + 
@@ -594,6 +599,9 @@ ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = num_of_rides, fill 
   guides(x = guide_axis(angle = 45))
 ```
 
+![](Rplot_7.png)
+
+
 \#MEAN RIDE TIME BY CUSTOMER TYPE
 
 ``` r
@@ -603,6 +611,8 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = c
   theme_light() +
   labs(x = 'Customer type', y = 'Mean ride length [min]', title = 'Mean ride length', subtitle = 'by customer type', caption = 'Source: Cyclistic bike-share system 2022 data')
 ```
+![](Rplot_8.png)
+
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = customer_type)) + 
@@ -626,6 +636,8 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = c
   labs(x = NULL, y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by month', caption = 'Source: Cyclistic bike-share system 2022 data') + 
   guides(fill = guide_legend(title = "Customer type"))
 ```
+![](Rplot_9.png)
+
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = month, y = mean_ride_len, fill = customer_type)) + 
@@ -640,6 +652,7 @@ ggplot(all_2022_data_summary, aes(x = month, y = mean_ride_len, fill = customer_
   labs(x = 'Month', y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by month', caption = 'Source: Cyclistic bike-share system 2022 data') + 
   guides(fill = guide_legend(title = "Customer type"))
 ```
+![](Rplot_10.png)
 
 \#AS SHOWED ABOVE, MEAN RIDE TIME FOR CASUAL USER IS HIGHER THAN FOR
 MEMBER BUT DEPENDS ON MONTH WHILE MEAN FOR MEMBER IS CONSISTENT
@@ -656,7 +669,7 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = c
   guides(fill = guide_legend(title = "Customer type"))
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/plot_11-1.png)<!-- -->
+![](Rplot_11.png)
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = mean_ride_len, fill = customer_type)) + 
@@ -668,7 +681,7 @@ ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = mean_ride_len,
   labs(x = 'Part of day when ride started', y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by part of day', caption = 'Source: Cyclistic bike-share system 2022 data')
 ```
 
-![](TEST-GH-KNIT_files/figure-gfm/plot_12-1.png)<!-- -->
+![](Rplot_12.png)
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = customer_type)) + 
@@ -687,6 +700,8 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = c
   labs(x = NULL, y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by day of week', caption = 'Source: Cyclistic bike-share system 2022 data') + 
   guides(fill = guide_legend(title = "Customer type"))
 ```
+![](Rplot_13.png)
+
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = mean_ride_len, fill = customer_type)) + 
@@ -698,6 +713,7 @@ ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = mean_ride_len, fill
   labs(x = 'Day of week', y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by day of week', caption = 'Source: Cyclistic bike-share system 2022 data') + 
   guides(x = guide_axis(angle = 45))
 ```
+![](Rplot_14.png)
 
 \#MEAN RIDE TIME VS NUMBER OF RIDES PERFORMED BY CASUALS AND MEMBERS (2
 RIDES WERE EXCLUDED - DODAĆ TABELĘ TOP 10 RIDES)
@@ -710,6 +726,7 @@ ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = c
   labs(x = 'Mean ride length [min]', y = 'Number of rides', title = 'Mean ride length by customer type', subtitle = 'by number of rides', caption = 'Source: Cyclistic bike-share system 2022 data') +
   guides(title = "Customer type")
 ```
+![](Rplot_15.png)
 
 \#LETS EXPLORE THE PEAK BETWEEN RIDES THAT LASTS BETWEEN 35 AND 70
 MINUTES PERFORMED BY CASUAL RIDERS
@@ -723,6 +740,8 @@ ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = c
   labs(x = 'Mean ride length [min]', y = 'Number of rides', title = 'Mean ride length', subtitle = 'by number of rides', caption = 'Source: Cyclistic bike-share system 2022 data') +
   guides(color = guide_legend(title = "Customer type"))
 ```
+![](Rplot_16.png)
+
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = customer_type)) + 
@@ -731,5 +750,7 @@ ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = c
   scale_x_continuous(limits = c(20, 90), breaks = seq(0, 90, by = 20)) +
   labs(x = 'Mean ride length [min]', y = 'Number of rides', title = 'Mean ride length by ridealble type', subtitle = 'by number of rides', caption = 'Source: Cyclistic bike-share system 2022 data')
 ```
+![](Rplot_17.png)
+
 
 ## 5. SHARE PHASE
