@@ -754,3 +754,4 @@ ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = c
 
 
 ## 5. SHARE PHASE
+https://public.tableau.com/views/AirBnbTestProject_16991254150810/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link
