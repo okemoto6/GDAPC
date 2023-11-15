@@ -754,3 +754,8 @@ ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = c
 
 
 ## 5. SHARE PHASE
+
+In addition to plots created in R Studio (included in analyze phase), data was visualized on Tableau interactive dashboard:
+
+
+## 6. ACT PHASE
