@@ -163,197 +163,197 @@ Cleaning details:
 
 Rows deleted during cleaning:
 
-<table class="tg">
+<table>
 <thead>
   <tr>
-    <th class="tg-c3ow" rowspan="2"></th>
-    <th class="tg-c3ow" colspan="2">start_lat</th>
-    <th class="tg-c3ow" colspan="2">start_lng</th>
-    <th class="tg-c3ow" colspan="2">end_lat</th>
-    <th class="tg-c3ow" colspan="2">end_lng</th>
-    <th class="tg-c3ow" rowspan="2">Ride_len &gt; 24 h<br>AND<br>Customer_type = casual</th>
-    <th class="tg-c3ow" rowspan="2">&nbsp;&nbsp;&nbsp;<br>Ride_len &lt; 10 sec&nbsp;&nbsp;&nbsp;</th>
+    <th rowspan="2"></th>
+    <th colspan="2">start_lat</th>
+    <th colspan="2">start_lng</th>
+    <th colspan="2">end_lat</th>
+    <th colspan="2">end_lng</th>
+    <th rowspan="2">Ride_len &gt; 24 h<br>AND<br>Customer_type = casual</th>
+    <th rowspan="2">&nbsp;&nbsp;&nbsp;<br>Ride_len &lt; 10 sec&nbsp;&nbsp;&nbsp;</th>
   </tr>
   <tr>
-    <th class="tg-c3ow">Values out of proper range</th>
-    <th class="tg-c3ow">nulls</th>
-    <th class="tg-c3ow">Values out of proper range</th>
-    <th class="tg-c3ow">nulls</th>
-    <th class="tg-c3ow">Values out of proper range</th>
-    <th class="tg-c3ow">nulls</th>
-    <th class="tg-c3ow">Values out of proper range</th>
-    <th class="tg-c3ow">nulls</th>
+    <th>Values out of proper range</th>
+    <th>nulls</th>
+    <th>Values out of proper range</th>
+    <th>nulls</th>
+    <th>Values out of proper range</th>
+    <th>nulls</th>
+    <th>Values out of proper range</th>
+    <th>nulls</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td class="tg-c3ow">January</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">1</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">&nbsp;&nbsp;&nbsp;<br>86&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">19</td>
-    <td class="tg-c3ow">550</td>
+    <td>January</td>
+    <td></td>
+    <td></td>
+    <td>1</td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;&nbsp;&nbsp;<br>86&nbsp;&nbsp;&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td>19</td>
+    <td>550</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">February</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">&nbsp;&nbsp;&nbsp;<br>77&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">65</td>
-    <td class="tg-c3ow">907</td>
+    <td>February</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;&nbsp;&nbsp;<br>77&nbsp;&nbsp;&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td>65</td>
+    <td>907</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">March</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">&nbsp;&nbsp;&nbsp;<br>266&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">42</td>
-    <td class="tg-c3ow">1470</td>
+    <td>March</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;&nbsp;&nbsp;<br>266&nbsp;&nbsp;&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td>42</td>
+    <td>1470</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">April</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">&nbsp;&nbsp;&nbsp;<br>317&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">11</td>
-    <td class="tg-c3ow">2513</td>
+    <td>April</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;&nbsp;&nbsp;<br>317&nbsp;&nbsp;&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td>11</td>
+    <td>2513</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">May</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">&nbsp;&nbsp;&nbsp;<br>722&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">15</td>
-    <td class="tg-c3ow">3307</td>
+    <td>May</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;&nbsp;&nbsp;<br>722&nbsp;&nbsp;&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td>15</td>
+    <td>3307</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">June</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">&nbsp;&nbsp;&nbsp;<br>1055&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">11</td>
-    <td class="tg-c3ow">3619</td>
+    <td>June</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;&nbsp;&nbsp;<br>1055&nbsp;&nbsp;&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td>11</td>
+    <td>3619</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">July</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">&nbsp;&nbsp;&nbsp;<br>947&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">21</td>
-    <td class="tg-c3ow">3844</td>
+    <td>July</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;&nbsp;&nbsp;<br>947&nbsp;&nbsp;&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td>21</td>
+    <td>3844</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">August</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">&nbsp;&nbsp;&nbsp;<br>843&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">9</td>
-    <td class="tg-c3ow">3889</td>
+    <td>August</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;&nbsp;&nbsp;<br>843&nbsp;&nbsp;&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td>9</td>
+    <td>3889</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">September</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">&nbsp;&nbsp;&nbsp;<br>712&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">7</td>
-    <td class="tg-c3ow">3162</td>
+    <td>September</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;&nbsp;&nbsp;<br>712&nbsp;&nbsp;&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td>7</td>
+    <td>3162</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">October</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">&nbsp;&nbsp;&nbsp;<br>475&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">8</td>
-    <td class="tg-c3ow">2834</td>
+    <td>October</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;&nbsp;&nbsp;<br>475&nbsp;&nbsp;&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td>8</td>
+    <td>2834</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">November</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">&nbsp;&nbsp;&nbsp;<br>238&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">5</td>
-    <td class="tg-c3ow">1822</td>
+    <td>November</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;&nbsp;&nbsp;<br>238&nbsp;&nbsp;&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td>5</td>
+    <td>1822</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">December</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">&nbsp;&nbsp;&nbsp;<br>128&nbsp;&nbsp;&nbsp;</td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow"></td>
-    <td class="tg-c3ow">3</td>
-    <td class="tg-c3ow">1268</td>
+    <td>December</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>&nbsp;&nbsp;&nbsp;<br>128&nbsp;&nbsp;&nbsp;</td>
+    <td></td>
+    <td></td>
+    <td>3</td>
+    <td>1268</td>
   </tr>
   <tr>
-    <td class="tg-baqh">TOTAL</td>
-    <td class="tg-baqh"></td>
-    <td class="tg-baqh"></td>
-    <td class="tg-baqh">1</td>
-    <td class="tg-baqh"></td>
-    <td class="tg-baqh"></td>
-    <td class="tg-baqh">5866</td>
-    <td class="tg-baqh"></td>
-    <td class="tg-baqh"></td>
-    <td class="tg-baqh">216</td>
-    <td class="tg-baqh">29185</td>
+    <td>TOTAL</td>
+    <td></td>
+    <td></td>
+    <td>1</td>
+    <td></td>
+    <td></td>
+    <td>5866</td>
+    <td></td>
+    <td></td>
+    <td>216</td>
+    <td>29185</td>
   </tr>
 </tbody>
 </table>
