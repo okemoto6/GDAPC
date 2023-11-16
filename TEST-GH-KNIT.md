@@ -769,7 +769,7 @@ html table test
   </tr>
 </thead>
 <tbody>
-  <tr>
+  <tr style="text-align: center;">
     <td colspan="2">STEPS IN EXCEL POWER QUERY TOOL</td>
   </tr>
   <tr>
