@@ -73,7 +73,7 @@ checked, cleaned and transformed separately.
 
 Cleaning details:
 
-``` html
+<html>
 <table>
 <thead>
   <tr>
@@ -142,11 +142,11 @@ Cleaning details:
   </tr>
 </tbody>
 </table>
-```
+</html>
 
 Rows deleted during cleaning:
 
-``` html
+<html>
 <table>
 <thead>
   <tr>
@@ -341,7 +341,7 @@ Rows deleted during cleaning:
   </tr>
 </tbody>
 </table>
-```
+</html>
 
 Cleaning process reduced number of rows by 0,62%; total number of
 deleted rows = 35268.
