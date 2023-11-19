@@ -1204,7 +1204,7 @@ which is about 7,18% of all rides taken.
 - as a whole ‘route’:
 
 ``` sql
-SELECT CONCAT(start_station_name, ’ - ’, end_station_name) AS trip_stations, COUNT (\*) AS num_of_rides
+SELECT CONCAT(start_station_name, ’ - ’, end_station_name) AS trip_stations, COUNT(*) AS num_of_rides
 FROM `gdapc-capstone-no-1.Cyclistic_2022_rides.all_2022_tripdata`
 WHERE start_station_name IS NOT NULL AND end_station_name IS NOT NULL
 GROUP BY trip_stations
