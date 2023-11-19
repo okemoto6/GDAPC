@@ -1094,12 +1094,12 @@ about full start and end information I have used querying dataset in
 BigQuery SQL:
 
 ``` sql
-SELECT SUM(num_of_rides) AS num_of_full_ride_info FROM ( SELECT
-concat(start_station_name, ’ - ’, end_station_name) AS trip_stations,
-COUNT(\*) AS num_of_rides FROM
-`gdapc-capstone-no-1.Cyclistic_2022_rides.all_2022_tripdata` WHERE
-start_station_name IS NOT NULL AND end_station_name IS NOT NULL GROUP BY
-trip_stations ORDER BY num_of_rides DESC)
+SELECT SUM(num_of_rides) AS num_of_full_ride_info
+FROM (SELECT concat(start_station_name, ’ - ’, end_station_name) AS trip_stations, COUNT(\*) AS num_of_rides
+      FROM `gdapc-capstone-no-1.Cyclistic_2022_rides.all_2022_tripdata`
+      WHERE start_station_name IS NOT NULL AND end_station_name IS NOT NULL
+      GROUP BY trip_stations
+      ORDER BY num_of_rides DESC)
 
 ```
 
