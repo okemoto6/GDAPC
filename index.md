@@ -1252,7 +1252,7 @@ the most popular areas where rides are taken.
 However, there should be none decisions made based on this data without
 unifying and replenishing it.
 
-## 5. SHARE PHASE
+# 5. SHARE PHASE
 
 In addition to plots created in R Studio (included in Analyze phase), data was visualized on Tableau interactive dashboards:
 
