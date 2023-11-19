@@ -73,9 +73,8 @@ checked, cleaned and transformed separately.
 
 Cleaning details:
 
-``` html
-<table>
-<thead>
+<html>
+    <table><thead>
   <tr>
     <th>Column(s)<br></th>
     <th>Action</th>
@@ -142,13 +141,12 @@ Cleaning details:
   </tr>
 </tbody>
 </table>
-```
+</html>
 
 Rows deleted during cleaning:
 
-``` html
-<table>
-<thead>
+<html>
+    <table><thead>
   <tr>
     <th rowspan="2"></th>
     <th colspan="2">start_lat</th>
@@ -341,8 +339,7 @@ Rows deleted during cleaning:
   </tr>
 </tbody>
 </table>
-```
-
+</html>
 Cleaning process reduced number of rows by 0,62%; total number of
 deleted rows = 35268.
 
@@ -1082,6 +1079,7 @@ For finding the number of all rides which could not provide information
 about full start and end information I have used querying dataset in
 BigQuery SQL:
 
+``` sql
 SELECT SUM(num_of_rides) AS num_of_full_ride_info FROM ( SELECT
 concat(start_station_name, ’ - ’, end_station_name) AS trip_stations,
 COUNT(\*) AS num_of_rides FROM
@@ -1089,9 +1087,11 @@ COUNT(\*) AS num_of_rides FROM
 start_station_name IS NOT NULL AND end_station_name IS NOT NULL GROUP BY
 trip_stations ORDER BY num_of_rides DESC)
 
-|     |                       |
-|-----|-----------------------|
+```
+
+
 |     | num_of_full_ride_info |
+|-----|-----------------------|
 |     | 4 350 593             |
 
 77,2% of rides data provides data about both start and end station name.
@@ -1100,10 +1100,13 @@ Queries for top 10 most popular station(s):
 
 - as a start:
 
+``` sql
 SELECT start_station_name, COUNT(\*) AS num_of_rides FROM
 `gdapc-capstone-no-1.Cyclistic_2022_rides.all_2022_tripdata` WHERE
 start_station_name IS NOT NULL GROUP BY start_station_name ORDER BY
 num_of_rides DESC LIMIT 10
+```
+
 
 |      | start_station_name                 | num_of_rides |
 |------|------------------------------------|--------------|
@@ -1119,12 +1122,14 @@ num_of_rides DESC LIMIT 10
 | 10\. | Wells St & Elm St                  | 31332        |
 
 Sum of top 10 start stations query:
+``` sql
 
 SELECT SUM(num_of_rides) as rides_sum_start FROM ( SELECT COUNT(\*) AS
 num_of_rides FROM
 `gdapc-capstone-no-1.Cyclistic_2022_rides.all_2022_tripdata` WHERE
 start_station_name IS NOT NULL GROUP BY start_station_name ORDER BY
 num_of_rides DESC LIMIT 10)
+```
 
 |     | rides_sum_start |
 |-----|-----------------|
@@ -1135,10 +1140,12 @@ which is about 7,19% of all rides taken.
 
 - as an end:
 
+``` sql
 SELECT end_station_name, COUNT(\*) AS num_of_rides FROM
 `gdapc-capstone-no-1.Cyclistic_2022_rides.all_2022_tripdata` WHERE
 end_station_name IS NOT NULL GROUP BY end_station_name ORDER BY
 num_of_rides DESC LIMIT 10
+```
 
 |      | end_station_name                   | num_of_rides |
 |------|------------------------------------|--------------|
@@ -1155,11 +1162,14 @@ num_of_rides DESC LIMIT 10
 
 Sum of top 10 end stations query:
 
+``` sql
 SELECT SUM(num_of_rides) AS rides_sum_end FROM ( SELECT COUNT(\*) AS
 num_of_rides FROM
 `gdapc-capstone-no-1.Cyclistic_2022_rides.all_2022_tripdata` WHERE
 end_station_name IS NOT NULL GROUP BY end_station_name ORDER BY
 num_of_rides DESC LIMIT 10)
+```
+
 
 |     | rides_sum_end |
 |-----|---------------|
@@ -1170,11 +1180,13 @@ which is about 7,18% of all rides taken.
 
 - as a whole ‘route’:
 
+``` sql
 SELECT CONCAT(start_station_name, ’ - ’, end_station_name) AS
 trip_stations, COUNT (\*) AS num_of_rides FROM
 `gdapc-capstone-no-1.Cyclistic_2022_rides.all_2022_tripdata` WHERE
 start_station_name IS NOT NULL AND end_station_name IS NOT NULL GROUP BY
 trip_stations ORDER BY num_of_rides DESC LIMIT 10
+```
 
 |      | trip_stations                                                         | num_of_rides |
 |------|-----------------------------------------------------------------------|--------------|
@@ -1191,12 +1203,14 @@ trip_stations ORDER BY num_of_rides DESC LIMIT 10
 
 Sum of top 10 trips route query:
 
+``` sql
 SELECT SUM(num_of_rides) AS rides_sum_trips FROM (SELECT
 concat(start_station_name, ’ - ’, end_station_name) AS trip_stations,
 COUNT(\*) AS num_of_rides FROM
 `gdapc-capstone-no-1.Cyclistic_2022_rides.all_2022_tripdata` WHERE
 start_station_name IS NOT NULL AND end_station_name IS NOT NULL GROUP BY
 trip_stations ORDER BY num_of_rides DESC LIMIT 10)
+```
 
 |     | rides_sum_trips |
 |-----|-----------------|
