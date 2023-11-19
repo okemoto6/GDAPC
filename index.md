@@ -1258,7 +1258,7 @@ In addition to plots created in R Studio (included in Analyze phase), data was v
 
 1. 2022 ride data:
 <html>
-
+<div class='tableauPlaceholder' id='viz1700408142036' style='position: relative'><noscript><a href='#'><img alt='How do annual members and casual riders use bikes differently? ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;GD&#47;GDAPCDash&#47;Dashboard4&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='GDAPCDash&#47;Dashboard4' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;GD&#47;GDAPCDash&#47;Dashboard4&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1700408142036');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='917px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='917px';} else { vizElement.style.width='100%';vizElement.style.height='2277px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
 </html>
 
 2. Most popular stations in 2022:
@@ -1358,13 +1358,13 @@ In addition to plots created in R Studio (included in Analyze phase), data was v
 
 11. Relation between ride length and rides taken for each rideable type:
 
-    - Classic bikes: member users takes more rides but they are shorter
+    - classic bikes: member users takes more rides but they are shorter
       then casual users rides which are less numerous.
 
-    - Electric bikes: number of rides for member and casual users are
+    - electric bikes: number of rides for member and casual users are
       similar (1 625 024 to 1 245 120) but they differ in length.
 
-    - Docked bikes: as mentioned before, only casual users takes rides
+    - docked bikes: as mentioned before, only casual users takes rides
       by assisted bikes. As analyze showed, those types of bikes are
       chosen for longer rides – the most frequent ride time for this
       option is between 35 and 70 minutes.
