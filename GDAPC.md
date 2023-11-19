@@ -1094,6 +1094,7 @@ trip_stations ORDER BY num_of_rides DESC)
 |-----|-----------------------|
 |     | 4 350 593             |
 
+
 77,2% of rides data provides data about both start and end station name.
 
 Queries for top 10 most popular station(s):
