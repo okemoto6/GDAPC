@@ -55,11 +55,11 @@ analysis:
 - *the start and end station names are not consistent. Further analysis
   showed that there is difference between number of station id’s and
   station names (same stations – by id - are sometimes named
-  differently).*
+  differently),*
 
-- *The latitude and longitude of stations does not always have same
+- *the latitude and longitude of stations does not always have same
   accuracy but is 100% complete. However, according to provided case
-  study information, coordinates are not used in this analysis project*
+  study information, coordinates are not used in this analysis project,*
 
 - *Because data is anonymized, it is impossible to link ride with user
   and analyze ones ride history.*
@@ -86,11 +86,11 @@ Cleaning details:
   </tr>
   <tr>
     <td>all</td>
-    <td>Checking if all columns have the right data type; changed where necessary.</td>
+    <td>Checking if all columns have the right data type; changed where necessary</td>
   </tr>
   <tr>
     <td>member_casual</td>
-    <td>Changing column name to customer_type for clarity.</td>
+    <td>Changing column name to customer_type for clarity</td>
   </tr>
   <tr>
     <td>started_at,<br>started_at_hour</td>
@@ -98,7 +98,7 @@ Cleaning details:
   </tr>
   <tr>
     <td>Started_at_hour_as_num</td>
-    <td>Adding new started_at_hour_as_num column to convert ‘started_at_hour’ values into number (decimal) data type; needed in further analysis.</td>
+    <td>Adding new started_at_hour_as_num column to convert ‘started_at_hour’ values into number (decimal) data type; needed in further analysis</td>
   </tr>
   <tr>
     <td>ride_id_len</td>
@@ -121,15 +121,15 @@ Cleaning details:
   </tr>
   <tr>
     <td>ridealble_type, customer_type</td>
-    <td>Filtering tool for checking distinct values.</td>
+    <td>Filtering tool for checking distinct values</td>
   </tr>
   <tr>
     <td>all</td>
-    <td>Checking for null values.<br>Note: despite null values in some ‘start_station_name’, ‘start_station_id’, ‘end_station_name’ and ‘end_station_id’ rows, these are removed only if at least one of four coordinates (start_lat, start_lng, end_lat, end_lng) is missing.<br></td>
+    <td>Checking for null values.<br>Note: despite null values in some ‘start_station_name’, ‘start_station_id’, ‘end_station_name’ and ‘end_station_id’ rows, these are removed only if at least one of four coordinates (start_lat, start_lng, end_lat, end_lng) is missing<br></td>
   </tr>
   <tr>
     <td>start_lat, start_lng, end_lat, end_lng</td>
-    <td>Checking if values are in appropriate coordinates range; delete where necessary.</td>
+    <td>Checking if values are in appropriate coordinates range; delete where necessary</td>
   </tr>
   <tr>
     <td>started_part_of_day</td>
@@ -137,7 +137,7 @@ Cleaning details:
   </tr>
   <tr>
     <td>Ride_len</td>
-    <td>Checking values.<br>According to provided information, casual members are those who purchase single-ride or full-day passes. Since there is no any additional information, all rides where:<br>•    ride_len &gt; 1.00:00:00 (24 hours)<br>AND<br>•    customer_type = casual<br>are filtered out.<br><br>Hypothesis: all rides up to 0.00:00:10 (10 seconds) may be indicator of some rent issuses, user plans change etc. Initial test (if start coordinates are equal to end coordinates) showed that the overwhelming majority of short (&lt; 10 sec) rides are starting and ending at the same station.<br>Final confirmation or rejection of this hypothesis needs some more information from the company. <br>Having regard to the above, as a safe solution, all rides shorter than 11 seconds were filtered out.<br></td>
+    <td>Checking values.<br>According to provided information, casual members are those who purchase single-ride or full-day passes. Since there is no any additional information, all rides where:<br>•    ride_len &gt; 1.00:00:00 (24 hours)<br>AND<br>•    customer_type = casual<br>are filtered out.<br><br>Hypothesis: all rides up to 0.00:00:10 (10 seconds) may be indicator of some rent issuses, user plans change etc. Initial test (if start coordinates are equal to end coordinates) showed that the overwhelming majority of short (&lt; 10 sec) rides are starting and ending at the same station.<br>Final confirmation or rejection of this hypothesis needs some more information from the company. <br>Having regard to the above, as a safe solution, all rides shorter than 11 seconds were filtered out<br></td>
   </tr>
 </tbody>
 </table>
@@ -1278,7 +1278,7 @@ In addition to plots created in R Studio (included in Analyze phase), data was v
 1.  In a year view, member users takes more rides than casual users.
     Casual users – 2 305 006 (which is ~41% of total rides), member
     users – 3 325 841 (~59% of total rides). The smallest casual-member
-    rides ratio has been seen in moths with highest total rides – July
+    rides ratio has been seen in months with highest total rides – July
     (49:51 ratio), June (48:52 ratio) and August 46:54 ratio). The
     highest proportion difference was observed at the same time in
     months with least total rides number: January (18:82), February
@@ -1359,10 +1359,10 @@ In addition to plots created in R Studio (included in Analyze phase), data was v
 11. Relation between ride length and rides taken for each rideable type:
 
     - classic bikes: member users takes more rides but they are shorter
-      then casual users rides which are less numerous.
+      then casual users rides which are less numerous,
 
     - electric bikes: number of rides for member and casual users are
-      similar (1 625 024 to 1 245 120) but they differ in length.
+      similar (1 625 024 to 1 245 120) but they differ in length,
 
     - docked bikes: as mentioned before, only casual users takes rides
       by assisted bikes. As analyze showed, those types of bikes are
