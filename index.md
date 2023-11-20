@@ -1371,8 +1371,4 @@ In addition to plots created in R Studio (included in Analyze phase), data was v
 
 ### Recommendations based on the analysis:
 
-1.  
-2.  
-3.  
-4.  
-5.  
+
