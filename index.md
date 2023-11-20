@@ -1368,3 +1368,22 @@ In addition to plots created in R Studio (included in Analyze phase), data was v
       by assisted bikes. As analyze showed, those types of bikes are
       chosen for longer rides – the most frequent ride time for this
       option is between 35 and 70 minutes.
+
+### Recommendations based on the analysis:
+
+#### 1. New marketing campaign should concentrate on those year- and week parts when casual members take the most of their rides:
+
+-   by months: from May to October (warmer months with best weather to
+    spend time outside; mainly late spring, summer and early autumn),
+
+-   by days: from Friday to Sunday. Having in mind that casual users
+    rides more at the weekends, campaign should take into consideration
+    not only three mentioned days but also holidays.
+
+#### 2. Because during weekends, casual rides are more popular than member rides, an additional point of consideration should be an additional type of membership: weekend-member, which will give opportunity to limitless rides among weekends. I believe that this type of membership, in a long term perspective, could result transforming into full membership.
+
+#### 3. Average ride length for casual users is longer and most of them are taken at afternoons and evenings, we can assume that those users use bikes at their free time and/or for leisure. Because of that, bike rides in that group should be promoted not only as a healthy way of spending time but also as an ecological, zero-emission way of commute option, an alternative to public transport or taxis. At the same time, accents at trouble-free, easiness and high availability should be put on.
+
+#### 4. As data from most popular stations among member users showed, one of the most popular stations among this group is located near university area. This could indicate that a big subgroup of annual bike users are students. I believe that a part of marketing campaign should focus on this group and be aimed in time at academic year time. At the same time, care must be taken of high bikes and station availability. Taking actions in this area should be preceded by completing station names and id's within database.
+
+#### 5. Because analysis revealed that only casual riders use assistive bikes options, some encouragements promoting annual subscription in this group should be considered. One of ways could be free/discounted docked bike ride per month when choosing annual membership. This need some more detailed information about docked bike users, especially demographics.
