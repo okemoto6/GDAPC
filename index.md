@@ -1368,7 +1368,3 @@ In addition to plots created in R Studio (included in Analyze phase), data was v
       by assisted bikes. As analyze showed, those types of bikes are
       chosen for longer rides – the most frequent ride time for this
       option is between 35 and 70 minutes.
-
-### Recommendations based on the analysis:
-
-
