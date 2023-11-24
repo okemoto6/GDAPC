@@ -372,18 +372,18 @@ data in one spreadsheet, so data have been imported into R Studio.
 ### DATA IMPORT AND BIND
 
 ``` r
-jan_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/012022_tripdata.csv", sep = ';')
-feb_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/022022_tripdata.csv", sep = ';')
-mar_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/032022_tripdata.csv", sep = ';')
-apr_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/042022_tripdata.csv", sep = ';')
-may_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/052022_tripdata.csv", sep = ';')
-jun_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/062022_tripdata.csv", sep = ';')
-jul_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/072022_tripdata.csv", sep = ';')
-aug_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/082022_tripdata.csv", sep = ';')
-sep_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/092022_tripdata.csv", sep = ';')
-oct_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/102022_tripdata.csv", sep = ';')
-nov_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/112022_tripdata.csv", sep = ';')
-dec_2022_data <- read.csv("D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/122022_tripdata.csv", sep = ';')
+jan_2022_data <- read.csv('D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/012022_tripdata.csv', sep = ';')
+feb_2022_data <- read.csv('D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/022022_tripdata.csv', sep = ';')
+mar_2022_data <- read.csv('D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/032022_tripdata.csv', sep = ';')
+apr_2022_data <- read.csv('D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/042022_tripdata.csv', sep = ';')
+may_2022_data <- read.csv('D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/052022_tripdata.csv', sep = ';')
+jun_2022_data <- read.csv('D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/062022_tripdata.csv', sep = ';')
+jul_2022_data <- read.csv('D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/072022_tripdata.csv', sep = ';')
+aug_2022_data <- read.csv('D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/082022_tripdata.csv', sep = ';')
+sep_2022_data <- read.csv('D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/092022_tripdata.csv', sep = ';')
+oct_2022_data <- read.csv('D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/102022_tripdata.csv', sep = ';')
+nov_2022_data <- read.csv('D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/112022_tripdata.csv', sep = ';')
+dec_2022_data <- read.csv('D:/GDAPC Case study/01_Bike_share/cleaned_in_excel/csv/122022_tripdata.csv', sep = ';')
 ```
 
 ``` r
@@ -707,24 +707,24 @@ kable(all_2022_data_rides)
 ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = customer_type)) + 
   geom_col() +
   facet_grid(~month, labeller = labeller(month = c(
-    "01" = "January",
-    "02" = "February",
-    "03" = "March",
-    "04" = "April",
-    "05" = "May",
-    "06" = "June",
-    "07" = "July",
-    "08" = "August",
-    "09" = "September",
-    "10" = "October",
-    "11" = "November",
-    "12" = "December"))) +
+    '01' = 'January',
+    '02' = 'February',
+    '03' = 'March',
+    '04' = 'April',
+    '05' = 'May',
+    '06' = 'June',
+    '07' = 'July',
+    '08' = 'August',
+    '09' = 'September',
+    '10' = 'October',
+    '11' = 'November',
+    '12' = 'December'))) +
   scale_y_continuous(labels = scales::comma) + 
   scale_fill_brewer(palette = 'Accent') +
   theme_light() + 
   theme(axis.text.x = element_blank()) + 
   labs(x = NULL, y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by month', caption = 'Source: Cyclistic bike-share system 2022 data') + 
-  guides(fill = guide_legend(title = "Customer type"))
+  guides(fill = guide_legend(title = 'Customer type'))
 ```
 
 ![](GDAPC_R_plots/Rplot_2.png)<!-- -->
@@ -735,8 +735,8 @@ ggplot(all_2022_data_summary, aes(x = month, y = num_of_rides, fill = customer_t
   geom_col(show.legend = FALSE) +
   facet_grid(~customer_type) + 
   scale_y_continuous(labels = scales::comma) +
-  scale_x_discrete(breaks = c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
-                   labels = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")) +
+  scale_x_discrete(breaks = c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'),
+                   labels = c('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')) +
   scale_fill_brewer(palette = 'Accent') +
   theme_light() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
@@ -769,13 +769,13 @@ kable(all_2022_data_calc)
 ``` r
 ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = customer_type)) +
 geom_col() +
-facet_grid(~factor(started_at_part_of_day, levels = c("Morning", "Afternoon", "Evening", "Night"))) +
+facet_grid(~factor(started_at_part_of_day, levels = c('Morning', 'Afternoon', 'Evening', 'Night'))) +
 scale_fill_brewer(palette = 'Dark2') +
 scale_y_continuous(labels = scales::comma) +
 theme_light() +
 theme(axis.text.x = element_blank()) +
 labs(x = NULL, y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by part of day when ride started', caption = 'Source: Cyclistic bike-share system 2022 data') +
-guides(fill = guide_legend(title = "Customer type"))
+guides(fill = guide_legend(title = 'Customer type'))
 ```
 
 ![](GDAPC_R_plots/Rplot_4.png)<!-- -->
@@ -785,7 +785,7 @@ ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = num_of_rides, 
   geom_col(show.legend = FALSE) +
   facet_grid(~customer_type) +
   scale_fill_brewer(palette = 'Dark2') +
-  scale_x_discrete(limits = c("Morning", "Afternoon", "Evening", "Night")) + 
+  scale_x_discrete(limits = c('Morning', 'Afternoon', 'Evening', 'Night')) + 
   scale_y_continuous(labels = scales::comma) + 
   theme_light() +
   labs(x = 'Part of day when ride started', y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by part of day', caption = 'Source: Cyclistic bike-share system 2022 data')
@@ -825,19 +825,19 @@ kable(all_2022_data_calc)
 ggplot(all_2022_data_summary, aes(x = customer_type, y = num_of_rides, fill = customer_type)) + 
   geom_col() + 
   facet_grid(~start_day_of_week, labeller = labeller(start_day_of_week = c(
-    "1" = "Monday",
-    "2" = "Tuesday",
-    "3" = "Wednesday",
-    "4" = "Thursday",
-    "5" = "Friday",
-    "6" = "Saturday",
-    "7" = "Sunday"))) +
+    '1' = 'Monday',
+    '2' = 'Tuesday',
+    '3' = 'Wednesday',
+    '4' = 'Thursday',
+    '5' = 'Friday',
+    '6' = 'Saturday',
+    '7' = 'Sunday'))) +
   scale_fill_brewer(palette = 'Dark2') + 
   scale_y_continuous(labels = scales::comma) +
   theme_light() +
   theme(axis.text.x = element_blank()) + 
   labs(x = NULL, y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by day of week', caption = 'Source: Cyclistic bike-share system 2022 data') +
-  guides(fill = guide_legend(title = "Customer type"))
+  guides(fill = guide_legend(title = 'Customer type'))
 ```
 ![](GDAPC_R_plots/Rplot_6.png)<!-- -->
 
@@ -847,7 +847,7 @@ ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = num_of_rides, fill 
   geom_col(show.legend = FALSE) + 
   facet_wrap(~customer_type) +
   scale_fill_brewer(palette = 'Dark2') + 
-  scale_x_discrete(limits = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")) + 
+  scale_x_discrete(limits = c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')) + 
   scale_y_continuous(labels = scales::comma) +
   theme_light() +
   labs(x = 'Day of week when ride started', y = 'Number of rides', title = 'Numer of rides performed by customer type', subtitle = 'by day of week', caption = 'Source: Cyclistic bike-share system 2022 data') +
@@ -860,7 +860,7 @@ ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = num_of_rides, fill 
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = customer_type)) + 
-  geom_bar(stat = "summary", fun = "mean", show.legend = FALSE) +
+  geom_bar(stat = 'summary', fun = 'mean', show.legend = FALSE) +
   scale_fill_brewer(palette = 'Set1') +
   theme_light() +
   labs(x = 'Customer type', y = 'Mean ride length [min]', title = 'Mean ride length', subtitle = 'by customer type', caption = 'Source: Cyclistic bike-share system 2022 data')
@@ -906,25 +906,25 @@ kable(all_2022_data_calc)
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = customer_type)) + 
-  geom_bar(stat = "summary", fun = "mean") + 
+  geom_bar(stat = 'summary', fun = 'mean') + 
   facet_grid(~month, labeller = labeller(month = c(
-    "01" = "January",
-    "02" = "February",
-    "03" = "March",
-    "04" = "April",
-    "05" = "May",
-    "06" = "June",
-    "07" = "July",
-    "08" = "August",
-    "09" = "September",
-    "10" = "October",
-    "11" = "November",
-    "12" = "December"))) +
+    '01' = 'January',
+    '02' = 'February',
+    '03' = 'March',
+    '04' = 'April',
+    '05' = 'May',
+    '06' = 'June',
+    '07' = 'July',
+    '08' = 'August',
+    '09' = 'September',
+    '10' = 'October',
+    '11' = 'November',
+    '12' = 'December'))) +
   scale_fill_brewer(palette = 'Accent') +
   theme_light() + 
   theme(axis.text.x = element_blank()) +
   labs(x = NULL, y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by month', caption = 'Source: Cyclistic bike-share system 2022 data') + 
-  guides(fill = guide_legend(title = "Customer type"))
+  guides(fill = guide_legend(title = 'Customer type'))
 ```
 ![](GDAPC_R_plots/Rplot_9.png)<!-- -->
 
@@ -933,13 +933,13 @@ ggplot(all_2022_data_summary, aes(x = month, y = mean_ride_len, fill = customer_
   geom_bar(stat = 'summary', fun = 'mean', show.legend = FALSE) +
   facet_grid(~customer_type) + 
   scale_fill_brewer(palette = 'Accent') +
-  scale_x_discrete(breaks = c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"),
-                   labels = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")) +
+  scale_x_discrete(breaks = c('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'),
+                   labels = c('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')) +
   scale_y_continuous(labels = scales::comma) + 
   theme_light() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(x = 'Month', y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by month', caption = 'Source: Cyclistic bike-share system 2022 data') + 
-  guides(fill = guide_legend(title = "Customer type"))
+  guides(fill = guide_legend(title = 'Customer type'))
 ```
 ![](GDAPC_R_plots/Rplot_10.png)<!-- -->
 
@@ -966,20 +966,20 @@ kable(all_2022_data_calc)
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = customer_type)) + 
-  geom_bar(stat = "summary", fun = "mean") +
-  facet_grid(~factor(started_at_part_of_day, levels = c("Morning", "Afternoon", "Evening", "Night"))) +
+  geom_bar(stat = 'summary', fun = 'mean') +
+  facet_grid(~factor(started_at_part_of_day, levels = c('Morning', 'Afternoon', 'Evening', 'Night'))) +
   scale_fill_brewer(palette = 'Dark2') +
   theme_light() + 
   theme(axis.text.x = element_blank()) + 
   labs(x = NULL, y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by part of day when ride started', caption = 'Source: Cyclistic bike-share system 2022 data') + 
-  guides(fill = guide_legend(title = "Customer type"))
+  guides(fill = guide_legend(title = 'Customer type'))
 ```
 
 ![](GDAPC_R_plots/Rplot_11.png)<!-- -->
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = started_at_part_of_day, y = mean_ride_len, fill = customer_type)) + 
-  geom_bar(stat = "summary", fun = "mean", show.legend = FALSE) + 
+  geom_bar(stat = 'summary', fun = 'mean', show.legend = FALSE) + 
   facet_wrap(~customer_type) +
   scale_fill_brewer(palette = 'Dark2') +
   scale_x_discrete(limits = c('Morning', 'Afternoon', 'Evening', 'Night')) +
@@ -1018,7 +1018,7 @@ kable(all_2022_data_calc)
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = customer_type)) + 
-  geom_bar(stat = "summary", fun = "mean") +
+  geom_bar(stat = 'summary', fun = 'mean') +
   facet_grid(~start_day_of_week, labeller = labeller(start_day_of_week = c(
     '1' = 'Monday',
     '2' = 'Tuesday',
@@ -1031,16 +1031,16 @@ ggplot(all_2022_data_summary, aes(x = customer_type, y = mean_ride_len, fill = c
   theme_light() + 
   theme(axis.text.x = element_blank()) +
   labs(x = NULL, y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by day of week', caption = 'Source: Cyclistic bike-share system 2022 data') + 
-  guides(fill = guide_legend(title = "Customer type"))
+  guides(fill = guide_legend(title = 'Customer type'))
 ```
 ![](GDAPC_R_plots/Rplot_13.png)<!-- -->
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = mean_ride_len, fill = customer_type)) + 
-  geom_bar(stat = "summary", fun = "mean", show.legend = FALSE) + 
+  geom_bar(stat = 'summary', fun = 'mean', show.legend = FALSE) + 
   facet_grid(~customer_type) +
   scale_fill_brewer(palette = 'Dark2') + 
-  scale_x_discrete(limits = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")) + 
+  scale_x_discrete(limits = c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')) + 
   theme_light() +
   labs(x = 'Day of week', y = 'Mean ride length [min]', title = 'Mean ride length by customer type', subtitle = 'by day of week', caption = 'Source: Cyclistic bike-share system 2022 data') + 
   guides(x = guide_axis(angle = 45))
@@ -1051,11 +1051,11 @@ ggplot(all_2022_data_summary, aes(x = start_day_of_week, y = mean_ride_len, fill
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = customer_type)) + 
-  geom_point(stat = "summary", fun = "mean") +
+  geom_point(stat = 'summary', fun = 'mean') +
   scale_x_continuous(limits = c(0, 360), breaks = seq(0, 360, by = 60)) +
   theme_light() +
   labs(x = 'Ride length [min]', y = 'Number of rides', title = 'Ride length by number of rides', subtitle = 'per customer type', caption = 'Source: Cyclistic bike-share system 2022 data') +
-  guides(title = "Customer type")
+  guides(title = 'Customer type')
 ```
 ![](GDAPC_R_plots/Rplot_15.png)<!-- -->
 
@@ -1064,17 +1064,17 @@ ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = c
 ``` r
 #1ST CASUAL PEAK IN DETAILS
 ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = customer_type)) + 
-  geom_point(stat = "summary", fun = "mean") +
+  geom_point(stat = 'summary', fun = 'mean') +
   scale_x_continuous(limits = c(20, 90), breaks = seq(0, 90, by = 5)) +
   theme_light() +
   labs(x = 'Mean ride length [min]', y = 'Number of rides', title = 'Mean ride length', subtitle = 'by number of rides', caption = 'Source: Cyclistic bike-share system 2022 data') +
-  guides(color = guide_legend(title = "Customer type"))
+  guides(color = guide_legend(title = 'Customer type'))
 ```
 ![](GDAPC_R_plots/Rplot_16.png)<!-- -->
 
 ``` r
 ggplot(all_2022_data_summary, aes(x = mean_ride_len, y = num_of_rides, color = customer_type)) + 
-  geom_point(stat = "summary", fun = "mean") + 
+  geom_point(stat = 'summary', fun = 'mean') + 
   facet_wrap(~rideable_type) + 
   scale_x_continuous(limits = c(20, 90), breaks = seq(0, 90, by = 20)) +
   labs(x = 'Mean ride length [min]', y = 'Number of rides', title = 'Mean ride length by ridealble type', subtitle = 'by number of rides', caption = 'Source: Cyclistic bike-share system 2022 data')
